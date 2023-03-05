@@ -1,6 +1,12 @@
 pipeline {
     agent any
     stages {
+        stage('Checkout') {
+            steps {
+                checkout([$class: 'GitSCM', branches: [[name: '*/master']], 
+                         userRemoteConfigs: [[url: 'https://github.com/yourusername/your-repo.git']]])
+            }
+        }
         stage('Execute shell command') {
             steps {
                 sh 'echo "Hello, world!"'
